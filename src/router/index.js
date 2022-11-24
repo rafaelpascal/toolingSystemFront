@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 import signIn from "../components/auth/signIn";
 import changePassword from "../components/auth/changePassword";
 import adminDashboard from "../components/admin/adminDashboard";
-import settingsPage from "../components/admin/settingsPage";
+// import settingsPage from "../components/admin/settingsPage";
 import settingsPage2 from "../components/admin/settingsPage2";
 import adminProfile from "../components/admin/adminProfile";
 import dashboardAdmin from "../components/admin/dashboardAdmin";
@@ -63,11 +63,11 @@ const routes = [
         name: "viewaReport",
         component: viewaReport,
       },
-      {
-        path: "/settingsPage",
-        name: "settingsPage",
-        component: settingsPage,
-      },
+      // {
+      //   path: "/settingsPage",
+      //   name: "settingsPage",
+      //   component: settingsPage,
+      // },
       {
         path: "/settingsPage2",
         name: "settingsPage2",

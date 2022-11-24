@@ -2,185 +2,194 @@
     <div class="container-fluid">
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-3">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title> Users Table</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                            <v-dialog v-model="dialog" persistent max-width="500px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <button class="ml-8 newR" v-bind="attrs" v-on="on"> <span class="mr-2"><i class="fas fa-plus"></i></span>
-                                        Create User
-                                    </button>
-                                </template>
-                                <v-card>
-                                    <v-card-title style="background-color: #21618C; color: #fff; margin-bottom: 2rem">
-                                        <span style="font-size: 20px">{{ formTitle }}</span>
-                                    </v-card-title>
+                <div class="tabTitle">
+                    <h4 class="ml-2">Users Table</h4>
+                    <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <!-- <v-toolbar-title> Users Table</v-toolbar-title> -->
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                                <v-dialog v-model="dialog" persistent max-width="500px">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <button class="ml-8 newR" v-bind="attrs" v-on="on"> <span class="mr-2"><i
+                                                    class="fas fa-plus"></i></span>
+                                            Create User
+                                        </button>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title
+                                            style="background-color: #21618C; color: #fff; margin-bottom: 2rem">
+                                            <span style="font-size: 20px">{{ formTitle }}</span>
+                                        </v-card-title>
 
-                                    <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.firstname" label="First Name">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.othername" label="Other Name">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.lastname" label="Last Name">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.unit" label="Unit">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.level" label="Level">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.phone" label="Phone">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-text-field v-model="editedItem.email" label="Email">
-                                                    </v-text-field>
-                                                </v-col>
-                                            </v-row>
-                                            <!-- <v-row  v-if="edititemBtn === false">
+                                        <v-card-text>
+                                            <v-container>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.firstname" label="First Name">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.othername" label="Other Name">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.lastname" label="Last Name">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.unit" label="Unit">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.level" label="Level">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.phone" label="Phone">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-text-field v-model="editedItem.email" label="Email">
+                                                        </v-text-field>
+                                                    </v-col>
+                                                </v-row>
+                                                <!-- <v-row  v-if="edititemBtn === false">
                                                 <v-col cols="12" sm="12" md="12">
                                                     <v-text-field v-model="editedItem.password" label="Password">
                                                     </v-text-field>
                                                 </v-col>
                                             </v-row> -->
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <v-select :items="category" v-model="editedItem.category"
-                                                        label="Category"></v-select>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <v-select :items="category" v-model="editedItem.category"
+                                                            label="Category"></v-select>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-container>
+                                        </v-card-text>
 
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <button class="cancl" @click="close">
-                                            Cancel
-                                        </button>
-                                        <button class="newR2" @click="save">
-                                            Save
-                                        </button>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                            <v-dialog persistent v-model="dialogDelete" width="400">
-                                <v-card class="px-4 py-4">
-                                    <div class="header-card">
-                                        <span style="font-size: 25px; cursor: pointer; color: grey;"
-                                            @click="dialogDelete = false"><i class="fas fa-times-circle"></i></span>
-                                    </div>
-                                    <div style="display: flex; justify-content: center; align-items: center">
-                                        <!-- <img src="../../assets/think.png" alt="" srcset="" style="background: #fff; "
-                                            width="50%"> -->
-                                        <span style="font-size: 5rem; color: #FFF176;">
-                                            <i class="fas fa-exclamation"></i>
-                                        </span>
-                                    </div>
-                                    <p class="mb-4 cancelrequest2">Are you sure you want to Change this User Status?</p>
-                                    <v-card-actions>
-                                        <div class="mt-4">
-                                            <!-- <button class="cancel2 mr-4" @click="closeDelete"> No Cancel</button> -->
-                                            <button class="sendRequest2" @click="deleteItemConfirm">Yes
-                                                Continue</button>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <button class="cancl" @click="close">
+                                                Cancel
+                                            </button>
+                                            <button class="newR2" @click="save">
+                                                Save
+                                            </button>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                                <v-dialog persistent v-model="dialogDelete" width="400">
+                                    <v-card class="px-4 py-4">
+                                        <div class="header-card">
+                                            <span style="font-size: 25px; cursor: pointer; color: grey;"
+                                                @click="dialogDelete = false"><i class="fas fa-times-circle"></i></span>
                                         </div>
-                                    </v-card-actions>
-                                    <!-- <v-card-actions>
+                                        <div style="display: flex; justify-content: center; align-items: center">
+                                            <!-- <img src="../../assets/think.png" alt="" srcset="" style="background: #fff; "
+                                            width="50%"> -->
+                                            <span style="font-size: 5rem; color: #FFF176;">
+                                                <i class="fas fa-exclamation"></i>
+                                            </span>
+                                        </div>
+                                        <p class="mb-4 cancelrequest2">Are you sure you want to Change this User Status?
+                                        </p>
+                                        <v-card-actions>
+                                            <div class="mt-4">
+                                                <!-- <button class="cancel2 mr-4" @click="closeDelete"> No Cancel</button> -->
+                                                <button class="sendRequest2" @click="deleteItemConfirm">Yes
+                                                    Continue</button>
+                                            </div>
+                                        </v-card-actions>
+                                        <!-- <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
                                         <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
                                         <v-spacer></v-spacer>
                                     </v-card-actions> -->
-                                </v-card>
-                            </v-dialog>
-                            <v-dialog persistent v-model="activateDelete" width="400">
-                                <v-card class="px-4 py-4">
-                                    <div class="header-card">
-                                        <span style="font-size: 25px; cursor: pointer; color: grey;"
-                                            @click="activateDelete = false"><i class="fas fa-times-circle"></i></span>
-                                    </div>
-                                    <div style="display: flex; justify-content: center; align-items: center">
-                                        <!-- <img src="../../assets/think.png" alt="" srcset="" style="background: #fff; "
-                                            width="50%"> -->
-                                        <span style="font-size: 5rem; color: #FFF176;">
-                                            <i class="fas fa-exclamation"></i>
-                                        </span>
-                                    </div>
-                                    <p class="mb-4 cancelrequest2">Are you sure you want to Change this User Status?</p>
-                                    <v-card-actions>
-                                        <div class="mt-4">
-                                            <!-- <button class="cancel2 mr-4" @click="closeDelete"> No Cancel</button> -->
-                                            <button class="sendRequest2" @click="activateItemConfirm">Yes
-                                                Continue</button>
+                                    </v-card>
+                                </v-dialog>
+                                <v-dialog persistent v-model="activateDelete" width="400">
+                                    <v-card class="px-4 py-4">
+                                        <div class="header-card">
+                                            <span style="font-size: 25px; cursor: pointer; color: grey;"
+                                                @click="activateDelete = false"><i
+                                                    class="fas fa-times-circle"></i></span>
                                         </div>
-                                    </v-card-actions>
-                                    <!-- <v-card-actions>
+                                        <div style="display: flex; justify-content: center; align-items: center">
+                                            <!-- <img src="../../assets/think.png" alt="" srcset="" style="background: #fff; "
+                                            width="50%"> -->
+                                            <span style="font-size: 5rem; color: #FFF176;">
+                                                <i class="fas fa-exclamation"></i>
+                                            </span>
+                                        </div>
+                                        <p class="mb-4 cancelrequest2">Are you sure you want to Change this User Status?
+                                        </p>
+                                        <v-card-actions>
+                                            <div class="mt-4">
+                                                <!-- <button class="cancel2 mr-4" @click="closeDelete"> No Cancel</button> -->
+                                                <button class="sendRequest2" @click="activateItemConfirm">Yes
+                                                    Continue</button>
+                                            </div>
+                                        </v-card-actions>
+                                        <!-- <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
                                         <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
                                         <v-spacer></v-spacer>
                                     </v-card-actions> -->
-                                </v-card>
-                            </v-dialog>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:[`item.actions`]="{ item }">
-                        <v-icon small class="mr-2" @click="editItem(item)">
-                            mdi-pencil
-                        </v-icon>
-                        <!-- <v-icon small @click="deleteItem(item)">
+                                    </v-card>
+                                </v-dialog>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-icon small class="mr-2" @click="editItem(item)">
+                                mdi-pencil
+                            </v-icon>
+                            <!-- <v-icon small @click="deleteItem(item)">
                             mdi-cog
                         </v-icon> -->
-                        <span>
-                            <v-btn @click="activateItem(item)" text
-                                style="color: #21618C; font-size: 12px; text-transform:capitalize"
-                                v-if="item.status === false">Activate</v-btn>
-                            <v-btn @click="deleteItem(item)" text
-                                style="color: red; font-size: 12px; text-transform:capitalize" v-else>Deactivate</v-btn>
-                        </span>
-                    </template>
-                    <template v-slot:[`item.status`]="{ item }">
-                        <span v-if="item.status === false" small
-                            style="color: red; font-size: 12px; text-transform:capitalize" class="mr-2">
-                            Inactive
-                        </span>
-                        <span v-else small style="color: #21618C; font-size: 12px; text-transform:capitalize">
-                            Active
-                        </span>
-                    </template>
-                    <!-- <template v-slot:no-data>
+                            <span>
+                                <v-btn @click="activateItemConfirm(item)" text
+                                    style="color: #21618C; font-size: 12px; text-transform:capitalize"
+                                    v-if="item.status === false">Activate</v-btn>
+                                <v-btn @click="deleteItemConfirm(item)" text
+                                    style="color: red; font-size: 12px; text-transform:capitalize" v-else>Deactivate
+                                </v-btn>
+                            </span>
+                        </template>
+                        <template v-slot:[`item.status`]="{ item }">
+                            <span v-if="item.status === false" small
+                                style="color: red; font-size: 12px; text-transform:capitalize" class="mr-2">
+                                Inactive
+                            </span>
+                            <span v-else small style="color: #21618C; font-size: 12px; text-transform:capitalize">
+                                Active
+                            </span>
+                        </template>
+                        <!-- <template v-slot:no-data>
                         <v-btn color="primary" @click="initialize">
                             Reset
                         </v-btn>
                     </template> -->
-                </v-data-table>
+                    </v-data-table>
+                </div>
             </div>
         </div>
     </div>
@@ -189,6 +198,7 @@
 <script>
 // import io from "socket.io-client";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 export default {
     data: () => ({
@@ -219,28 +229,29 @@ export default {
                 align: 'start',
                 sortable: false,
                 value: 'firstname',
+                class: 'blue-grey lighten-4'
             },
             {
                 text: 'Other Name',
                 align: 'start',
                 sortable: false,
                 value: 'othername',
+                class: 'blue-grey lighten-4'
             },
             {
                 text: 'Last Name',
                 align: 'start',
                 sortable: false,
                 value: 'lastname',
+                class: 'blue-grey lighten-4'
             },
-            { text: 'Category', value: 'category' },
-            { text: 'Unit', value: 'unit' },
-            { text: 'Level', value: 'level' },
-            // { text: 'Dispatcher', value: 'rider' },
-            { text: 'Phone', value: 'phone' },
-            { text: 'Email', value: 'email' },
-            { text: 'Status', value: 'status' },
-            // { text: 'Date Created', value: 'date' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Category', value: 'category', class: 'blue-grey lighten-4'},
+            { text: 'Unit', value: 'unit', class: 'blue-grey lighten-4'},
+            { text: 'Level', value: 'level', class: 'blue-grey lighten-4'},
+            { text: 'Phone', value: 'phone', class: 'blue-grey lighten-4'},
+            { text: 'Email', value: 'email', class: 'blue-grey lighten-4'},
+            { text: 'Status', value: 'status', class: 'blue-grey lighten-4'},
+            { text: 'Actions', value: 'actions', sortable: false, class: 'blue-grey lighten-4'},
         ],
         // desserts: [],
         desserts: [],
@@ -288,52 +299,39 @@ export default {
     },
     async beforeMount() {
         this.getCategory()
-        // document.getElementById("bar").style.display = "none";
-        // this.socketInstance = io("http://localhost:3000");
-        // const retrievedData = localStorage.getItem('token');
-        // console.log(JSON.parse(retrievedData));
-        // const token = JSON.parse(retrievedData);
-
-        await axios.all([
-            axios.get('http://localhost:3000/api/v1/review/users/getUsers'),
-            // axios.get('http://localhost:3000/api/v1/jwtauth/user/users', {
-            //     headers: {
-            //         'token': `Bearer ${token}`
-            //     }
-            // }),
-            // axios.get('http://localhost:3000/api/v1/jwtauth/riders/rider', {
-            //     headers: {
-            //         'token': `Bearer ${token}`
-            //     }
-            // }),
-        ])
-            .then(axios.spread((response1) => {
-                this.request = response1.data.data.nbHits
-                // this.users = response2.data.data.nbHits
-                // this.riders = response3.data.data.nbHits
-                console.log(response1.data.data.Allusers);
-                response1.data.data.Allusers.forEach(elem => {
-                    this.desserts.push({
-                        userId: elem._id,
-                        firstname: elem.firstName,
-                        othername: elem.otherName,
-                        lastname: elem.lastName,
-                        date: elem.createdAt.split("T")[0],
-                        category: elem.category.Category,
-                        unit: elem.unit,
-                        level: elem.level,
-                        phone: elem.phone,
-                        email: elem.email,
-                        status: elem.isActive,
-
-                    })
-                });
-            }))
-            .catch(function (error) {
-                console.log(error);
-            });
+        this.getusers()
     },
     methods: {
+        async getusers() {
+            const retrievedData = localStorage.getItem('token');
+            const token = JSON.parse(retrievedData);
+            await axios.get(`http://localhost:3000/api/v1/review/users/getUsers`, {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+                .then((response) => {
+                    response.data.data.Allusers.forEach(elem => {
+                        this.desserts.push({
+                            userId: elem._id,
+                            firstname: elem.firstName,
+                            othername: elem.otherName,
+                            lastname: elem.lastName,
+                            date: elem.createdAt.split("T")[0],
+                            category: elem.category.Category,
+                            unit: elem.unit,
+                            level: elem.level,
+                            phone: elem.phone,
+                            email: elem.email,
+                            status: elem.isActive,
+
+                        })
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        },
         async getCategory() {
             const retrievedData = localStorage.getItem('token');
             const token = JSON.parse(retrievedData);
@@ -361,15 +359,6 @@ export default {
                 this.addMessage()
             this.mesg = ""
         },
-        // handleScroll() {
-        //     if (window.pageYOffset > 0) {
-        //         if (this.view.topOfPage) this.view.topOfPage = false
-        //         // document.getElementById("bar").style.display = "block";
-        //     } else {
-        //         if (!this.view.topOfPage) this.view.topOfPage = true
-        //         // document.getElementById("bar").style.display = "none";
-        //     }
-        // },
 
         editItem(item) {
             this.edititemBtn = true
@@ -390,36 +379,59 @@ export default {
             this.activateDelete = true
         },
 
-        async deleteItemConfirm() {
-            // const retrievedData = localStorage.getItem('token');
-            // console.log(JSON.parse(retrievedData));
-            // const token = JSON.parse(retrievedData);
-            // const itemId = this.editedItem.itemId
-            // console.log(itemId);
+        //This function is used to Deactivate
+        async deleteItemConfirm(item) {
+            this.editedIndex = this.desserts.indexOf(item)
+            this.editedItem = Object.assign({}, item)
             const userId = this.editedItem.userId
-            await axios.patch(`http://localhost:3000/api/v1/review/users/deactivateUser/${userId}`)
+            await axios.patch(`http://localhost:3000/api/v1/review/users/deactivateUser/${userId}`,
+                {
+                    isActive: false,
+                })
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data.data.user.isActive);
+                    const item = response.data.data.user;
+                    this.editedItem = {
+                        status: item.isActive
+                    };
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceed',
+                        showConfirmButton: false,
+                        text: 'User Deactivated Successfully',
+                        width: 350,
+                        timer: 1000
+                    })
                     Object.assign(this.desserts[this.editedIndex], this.editedItem)
-                    this.close()
                 })
                 .catch((error) => {
                     console.log(error);
                 })
             this.closeDelete()
         },
-        async activateItemConfirm() {
-            // const retrievedData = localStorage.getItem('token');
-            // console.log(JSON.parse(retrievedData));
-            // const token = JSON.parse(retrievedData);
-            // const itemId = this.editedItem.itemId
-            // console.log(itemId);
+
+        //This function is used to Activate the user after deactivation
+        async activateItemConfirm(item) {
+            this.editedIndex = this.desserts.indexOf(item)
+            this.editedItem = Object.assign({}, item)
             const userId = this.editedItem.userId
             await axios.patch(`http://localhost:3000/api/v1/review/users/activateUser/${userId}`)
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
+                    console.log(response.data.data.user.isActive);
+                    const item = response.data.data.user;
+                    this.editedItem = {
+                        status: item.isActive
+                    };
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Proceed',
+                        showConfirmButton: false,
+                        text: 'User Activated Successfully',
+                        width: 350,
+                        timer: 1000
+                    })
                     Object.assign(this.desserts[this.editedIndex], this.editedItem)
-                    this.close()
                 })
                 .catch((error) => {
                     console.log(error);
@@ -452,13 +464,7 @@ export default {
         },
 
         async save() {
-            // const retrievedData = localStorage.getItem('token');
-            // console.log(JSON.parse(retrievedData));
-            // const token = JSON.parse(retrievedData);
             const userId = this.editedItem.userId
-            // const riderId = this.editedItem.riderId
-            // console.log(userId);
-            // console.log(this.editedIndex);
             if (this.editedIndex > -1) {
                 await axios.patch(`http://localhost:3000/api/v1/review/users/User/${userId}`,
                     {
@@ -495,7 +501,7 @@ export default {
                     })
                     .then((response) => {
                         const item = response.data;
-                        console.log(response.data);
+                        console.log('post User',response.data);
                         this.editedItem = {
                             userId: item._id,
                             firstname: item.firstName,
@@ -540,6 +546,29 @@ $color-accent: desaturate(navy, 80%);
     padding-top: 5rem;
     padding-left: 5rem;
     padding-bottom: 5rem;
+    background: #E5E5E5;
+    height: 100vh;
+}
+
+.tabTitle {
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    h4 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4F4F4F;
+    }
 }
 
 .sideBtn {
@@ -1290,9 +1319,12 @@ nav {
     }
 
     .container-fluid {
-        position: absolute;
-        top: 10%;
-        padding: 1rem;
+        // position: absolute;
+        // top: 10%;
+        padding-top: 5rem;
+        padding-left: 1rem;
+        height: auto;
+        background-color: #E5E5E5;
     }
 
     .reviews {

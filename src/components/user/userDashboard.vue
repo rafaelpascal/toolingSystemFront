@@ -1,90 +1,59 @@
 <template>
-    <div class="container-fluid">
+    <div class="pr-0 mr-0 container-fluid">
         <div class="row no-gutters">
             <header class="header" id="header">
                 <div style="display: flex; justify-content:center; align-items: center;">
                     <div @click="close" id="togg" class="header_toggle">
                         <i class="fas fa-bars" id="header-toggle"></i>
                     </div>
-                    <!-- <h6 class="namet" style="">Rafael Pascal</h6> -->
+                    <!-- <span class="welcomeMsg">Welcome<span style="margin-left: 6px">{{ avatar
+                    }}</span></span> -->
                 </div>
-                <div style="display: flex; justify-content:center; align-items: center;">
+                <!-- <div style="display: flex; justify-content:center; align-items: center;">
                     <span class="mx-2">{{ email }}</span>
                     <v-menu open-on-hover offset-y>
                         <template v-slot:activator="{ on, attrs }">
-                            <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                                Dropdown
-                            </v-btn> -->
                             <v-avatar v-bind="attrs" v-on="on">
                                 <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                             </v-avatar>
                         </template>
-
                         <v-list>
                             <v-list-item>
                                 <router-link text style="text-transform:capitalize; font-size:15px; color: #4A869F"
                                     to="/userProfile">Profile</router-link>
                             </v-list-item>
-                            <!-- <v-list-item>
+                        </v-list>
+                    </v-menu>
+                </div> -->
+                <div style="display: flex; justify-content:space-between; align-items: center;">
+                    <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <span v-bind="attrs" v-on="on" class="emaildiv" id="email">{{ email }} <button text><i
+                                        class="fas fa-chevron-down"></i></button></span>
+                        </template>
+                        <v-list>
+                            <v-list-item>
                                 <router-link text style="text-transform:capitalize; font-size:15px; color: #4A869F"
-                                    to="/changePassword"> Reset
-                                    Password
-                                </router-link>
-                            </v-list-item> -->
+                                    to="/userProfile">Profile</router-link>
+                            </v-list-item>
                         </v-list>
                     </v-menu>
                     <v-badge class="mx-2" color="#4A869F" :content="CountDown">
                         <!-- <span style="font-size:28px"><i class="far fa-bell">{{ CountDown }}</i></span> -->
                     </v-badge>
-                    <!-- <button style="color: #000" class="nav_link">Log Out</button> -->
                 </div>
             </header>
             <div class="l-navbar" id="nav-bar">
                 <nav class="nav">
                     <div>
-                        <!-- <a href="#" style="text-decoration: none;" class="nav_logo">
-                            <span style="display: flex; align-item:center;">
-                                <img id="lightLogo" src="../../assets/Delivery servicesdark.png" alt="" srcset=""
-                                    width="40px">
-                                <span class="logoTxt">
-                                    <h4>Xpress Riders</h4>
-                                    <p>Delivery Service</p>
-                                </span>
-                            </span>
-                        </a> -->
-
                         <div class="nav_list">
                             <ul style="padding: 0%; margin: 0%" class="list-unstyled components">
-                                <!-- <li>
-                                    <router-link class="nav_link" to="/insideDashboard"> <span style="font-size: 20px">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                        </span> <span class="nav_name">Dashboard</span>
-                                    </router-link>
-                                </li> -->
-                                <!-- <li>
-                                    <router-link class="nav_link" to="/chat"> <span style="font-size: 20px">
-                                            <i class="fas fa-folder-open"></i>
-                                        </span> <span class="nav_name">Chat</span>
-                                    </router-link>
-                                </li> -->
                                 <li>
                                     <router-link class="nav_link" to="/createReport"> <span style="font-size: 20px">
                                             <i class="fas fa-user"></i>
                                         </span> <span class="nav_name">Create Report</span>
                                     </router-link>
                                 </li>
-                                <!-- <li>
-                                    <router-link class="nav_link" to="/profilePage"> <span style="font-size: 20px">
-                                            <i class="fas fa-file"></i>
-                                        </span> <span class="nav_name">Profile</span>
-                                    </router-link>
-                                </li> -->
-                                <!-- <li>
-                                    <router-link class="nav_link" to="/completedRequest">
-                                        <span style="font-size: 20px">
-                                            <i class="fas fa-th-list"></i>
-                                        </span> <span class="nav_name"> Submitted Report</span></router-link>
-                                </li> -->
                             </ul>
                         </div>
                     </div> <a style="text-decoration:none" href="#" class="nav_link"><span style="font-size: 20px">
@@ -113,6 +82,7 @@ export default {
             bell: '',
             CountDown: '',
             email: '',
+            avatar: '',
             subMenu: false,
         }
     },
@@ -138,7 +108,9 @@ export default {
         ])
             .then(axios.spread((response1, response2) => {
                 this.email = response2.data.user.email
-                console.log(response1.data.data.settings);
+                this.avatar = response2.data.user.lastName
+
+                console.log(response1.data.data);
                 // const date = new Date().toDateString().split(" ")[2]
                 const dateDay = new Date().getDate();
 
@@ -156,25 +128,10 @@ export default {
                 //console.log(CurrentDay);
                 this.CountDown = CurrentDay - dateDay
                 console.log(this.CountDown);
-
-                // response1.data.data.settings.forEach(elem => {
-                //     this.bellArray.push({
-                //         day: elem.day.split("-")[2],
-                //         bell: elem.day - dateDay
-                //         // bell: this.bellArray.day.split("-")[2]
-                //     })
-                // });
-                // console.log(this.bellArray);
-                //response2 is the result of second call
             }))
             .catch(function (error) {
                 console.log(error);
             });
-        // $(document).ready(function () {
-        //     $('#sidebarCollapse').on('click', function () {
-        //         $('#sidebar').toggleClass('active');
-        //     });
-        // });
     },
 
     methods: {
@@ -231,6 +188,16 @@ a {
     color: #4A869F
 }
 
+.welcomeMsg {
+    font-family: 'Red Hat Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    margin-left: 20px;
+    color: #252A2F;
+}
+
 .logoTxt {
     display: flex;
     flex-direction: column;
@@ -271,6 +238,21 @@ a {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 100;
     transition: .5s
+}
+
+.emaildiv {
+    padding: 10px 12px;
+    width: 100%;
+    // height: 32px;
+    background: #F2F2F2;
+    border-radius: 16px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+    color: #444444;
 }
 
 .namet {
@@ -616,6 +598,9 @@ a.article:hover {
 }
 
 @media(min-width: 320px) and (max-width: 800px) {
+    #email {
+        display: none;
+    }
     body {
         position: relative;
         margin: 3rem 0 0 0;

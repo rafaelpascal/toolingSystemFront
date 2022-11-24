@@ -2,161 +2,123 @@
     <div class="container-fluid">
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-3">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title> My Reports</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                            <v-dialog v-model="dialog" persistent max-width="750px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <button class="ml-8 newR" v-bind="attrs" v-on="on">
-                                        New Report
-                                    </button>
-                                </template>
-                                <v-card>
-                                    <v-card-title style="background-color: #21618C; color: #fff; margin-bottom: 2rem">
-                                        <span style="font-size: 20px">{{ formTitle }}</span>
-                                    </v-card-title>
-
-                                    <v-card-text>
-                                        <v-container>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <h4 class="my-2 title-txt2">Goals for this period</h4>
-                                                    <vue-editor v-model="editedItem.goals">
-                                                    </vue-editor>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <h4 class="my-2 title-txt2">My accomplishments</h4>
-                                                    <vue-editor v-model="editedItem.accomplishment">
-                                                    </vue-editor>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <h4 class="my-2 title-txt2">How I worked with others</h4>
-                                                    <vue-editor v-model="editedItem.workWithOthers">
-                                                    </vue-editor>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row>
-                                                <v-col cols="12" sm="12" md="12">
-                                                    <h4 class="my-2 title-txt2">Here are my thoughts on the expectations
-                                                        and competencies for the last period.</h4>
-                                                    <vue-editor v-model="editedItem.thoughts">
-                                                    </vue-editor>
-                                                </v-col>
-                                            </v-row>
-                                            <v-row class="mt-10">
-                                                <v-col cols="6" sm="6" md="6">
-                                                    <!-- <h4 class="my-2 title-txt2">Date</h4> -->
-                                                    <div>
-                                                        <!-- <div class="mb-6">Active picker:
-                                                            <code>{{ activePicker || 'null' }}</code>
-                                                        </div> -->
-                                                        <!-- <v-select :items="years" label="Outlined style" outlined>
-                                                        </v-select> -->
-                                                        <v-select :items="years" v-model="editedItem.years"
-                                                            label="Select Year" dense></v-select>
-                                                        <!-- <v-menu ref="menu" v-model="menu"
-                                                            :close-on-content-click="false"
-                                                            transition="scale-transition" offset-y min-width="auto">
-                                                            <template v-slot:activator="{ on, attrs }">
-                                                                <v-text-field v-model="date" label="Date"
-                                                                    prepend-icon="mdi-calendar" readonly v-bind="attrs"
-                                                                    v-on="on"></v-text-field>
-                                                            </template>
-                                                            <v-date-picker v-model="editedItem.date"
-                                                                :active-picker.sync="activePicker"
-                                                                :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                                                                min="1950-01-01" @change="savedate"></v-date-picker>
-                                                        </v-menu> -->
-                                                    </div>
-                                                </v-col>
-                                                <v-col cols="6" sm="6" md="6">
-                                                    <!-- <h4 class="my-2 title-txt2">Date</h4> -->
-                                                    <div>
-                                                        <!-- <div class="mb-6">Active picker:
-                                                            <code>{{ activePicker || 'null' }}</code>
-                                                        </div> -->
-                                                        <!-- <v-select :items="years" label="Outlined style" outlined>
-                                                        </v-select> -->
-                                                        <v-select :items="monthNames" v-model="editedItem.monthNames"
-                                                            label="Select Month" dense>
-                                                        </v-select>
-                                                        <!-- <v-menu ref="menu" v-model="menu"
-                                                            :close-on-content-click="false"
-                                                            transition="scale-transition" offset-y min-width="auto">
-                                                            <template v-slot:activator="{ on, attrs }">
-                                                                <v-text-field v-model="date" label="Date"
-                                                                    prepend-icon="mdi-calendar" readonly v-bind="attrs"
-                                                                    v-on="on"></v-text-field>
-                                                            </template>
-                                                            <v-date-picker v-model="editedItem.date"
-                                                                :active-picker.sync="activePicker"
-                                                                :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                                                                min="1950-01-01" @change="savedate"></v-date-picker>
-                                                        </v-menu> -->
-                                                    </div>
-                                                </v-col>
-                                            </v-row>
-                                        </v-container>
-                                    </v-card-text>
-
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <button class="cancl" @click="close">
-                                            Cancel
+                <div class="tabTitle">
+                    <h4 class="ml-2">My Reports</h4>
+                    <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                                <v-dialog v-model="dialog" persistent max-width="750px">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <button class="ml-8 newR" v-bind="attrs" v-on="on">
+                                            New Report
                                         </button>
-                                        <button class="newR2" @click="save">
-                                            Save
-                                        </button>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                            <v-dialog v-model="dialogDelete" max-width="500px">
-                                <v-card>
-                                    <v-card-title class="text-h5">Are you sure you want to delete this item?
-                                    </v-card-title>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                        <v-spacer></v-spacer>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:[`item.submissionDate`]="{ item }">
-                        <span v-if="item.submissionDate === item.month" small
-                            style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
-                            Submitted
-                        </span>
-                        <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
-                           Late Submission
-                        </span>
-                    </template>
-                    <template v-slot:[`item.actions`]="{ item }">
-                        <v-btn text style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"  @click="pushtoView(item)">
-                            view Report
-                        </v-btn>
-                        <!-- <v-btn text  style="color: #21618C; font-size: 12px; text-transform:capitalize"  @click="pushtoView(item)">
-                            view
-                        </v-btn> -->
-                        <!-- <v-icon small class="mr-2" @click="pushtoView(item)">
-                            mdi-eye
-                        </v-icon> -->
-                        <!-- <v-icon small @click="deleteItem(item)">
-                            mdi-delete
-                        </v-icon> -->
-                    </template>
-                </v-data-table>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title
+                                            style="background-color: #21618C; color: #fff; margin-bottom: 2rem">
+                                            <span style="font-size: 20px">{{ formTitle }}</span>
+                                        </v-card-title>
+
+                                        <v-card-text>
+                                            <v-container>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <h4 class="my-2 title-txt2">Goals for this period</h4>
+                                                        <vue-editor v-model="editedItem.goals">
+                                                        </vue-editor>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <h4 class="my-2 title-txt2">My accomplishments</h4>
+                                                        <vue-editor v-model="editedItem.accomplishment">
+                                                        </vue-editor>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <h4 class="my-2 title-txt2">How I worked with others</h4>
+                                                        <vue-editor v-model="editedItem.workWithOthers">
+                                                        </vue-editor>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row>
+                                                    <v-col cols="12" sm="12" md="12">
+                                                        <h4 class="my-2 title-txt2">Here are my thoughts on the
+                                                            expectations
+                                                            and competencies for the last period.</h4>
+                                                        <vue-editor v-model="editedItem.thoughts">
+                                                        </vue-editor>
+                                                    </v-col>
+                                                </v-row>
+                                                <v-row class="mt-10">
+                                                    <v-col cols="6" sm="6" md="6">
+                                                        <!-- <h4 class="my-2 title-txt2">Date</h4> -->
+                                                        <div>
+                                                            <v-select :items="years" v-model="editedItem.years"
+                                                                label="Select Year" dense></v-select>
+                                                        </div>
+                                                    </v-col>
+                                                    <v-col cols="6" sm="6" md="6">
+                                                        <!-- <h4 class="my-2 title-txt2">Date</h4> -->
+                                                        <div>
+                                                            <v-select :items="monthNames"
+                                                                v-model="editedItem.monthNames" label="Select Month"
+                                                                dense>
+                                                            </v-select>
+                                                        </div>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-container>
+                                        </v-card-text>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <button class="cancl" @click="close">
+                                                Cancel
+                                            </button>
+                                            <button class="newR2" @click="save">
+                                                Save
+                                            </button>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                                <v-dialog v-model="dialogDelete" max-width="500px">
+                                    <v-card>
+                                        <v-card-title class="text-h5">Are you sure you want to delete this item?
+                                        </v-card-title>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                                            <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                                            <v-spacer></v-spacer>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.submissionDate`]="{ item }">
+                            <span v-if="item.submissionDate === item.month" small
+                                style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
+                                Submitted
+                            </span>
+                            <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
+                                Late Submission
+                            </span>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-btn text
+                                style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"
+                                @click="pushtoView(item)">
+                                view Report
+                            </v-btn>
+                        </template>
+                    </v-data-table>
+                </div>
             </div>
         </div>
     </div>
@@ -290,6 +252,7 @@ export default {
             });
     },
     methods: {
+        // This function will push you to viewing a report
         pushtoView(item) {
             const IdItem = item.itemId
             const retrievedData = localStorage.getItem('token');
@@ -343,13 +306,9 @@ export default {
             this.dialogDelete = true
         },
 
+        // THE DELETE FUNCTION IS FOR DEACTIVATING A USER
         async deleteItemConfirm() {
-            // const retrievedData = localStorage.getItem('token');
-            // console.log(JSON.parse(retrievedData));
-            // const token = JSON.parse(retrievedData);
-            // const itemId = this.editedItem.itemId
-            // console.log(itemId);
-            const userId = this.editedItem.userId
+            const userId = this.editedItem.userId //USER ID
             await axios.delete(`http://localhost:3000/api/v1/review/users/User/${userId}`)
                 .then((response) => {
                     console.log(response);
@@ -378,17 +337,14 @@ export default {
             })
         },
 
+        // THE SAVE FUNCTION IS FOR CREATUING THE REPORT BY THE USER
         async save() {
-            const retrievedData = localStorage.getItem('token');
-            // console.log(JSON.parse(retrievedData));
+            const retrievedData = localStorage.getItem('token'); //THE TOKEN IS COMING FROM THE LOCAL STORAGE
             const token = JSON.parse(retrievedData);
             console.log(token);
-            // const userId = this.editedItem.userId
-            // const riderId = this.editedItem.riderId
-            // console.log(userId);
-            // console.log(this.editedIndex);
             await axios.post(`http://localhost:3000/api/v1/review/userreport/postreview`,
                 {
+                    // This is the payload
                     goals: this.editedItem.goals,
                     workingWithothers: this.editedItem.workWithOthers,
                     accomplishment: this.editedItem.accomplishment,
@@ -426,9 +382,7 @@ export default {
                     console.log(error);
                 })
 
-            // const retrievedData = localStorage.getItem('token');
-            // const token = JSON.parse(retrievedData);
-            // LOGGING
+            // LOGGING this function is for Logging what the user is doing into the System
             await axios.post(`http://localhost:3000/api/v1/review/logRoute/newlog/${this.userID}`,
                 {
                     activity: `Created a Report`
@@ -444,13 +398,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 })
-
-            // if (this.editedIndex > -1) {
-            //     Object.assign(this.desserts[this.editedIndex], this.editedItem)
-            // } else {
-            //     this.desserts.push(this.editedItem)
-            // }
-            // this.close()
         },
     },
 }
@@ -465,9 +412,33 @@ $color-text: #222;
 $color-accent: desaturate(navy, 80%);
 
 .container-fluid {
-    // position: absolute;
-    // top: 10%;
-    padding: 5rem;
+    height: 100vh;
+    padding-top: 5rem;
+    padding-left: 5rem;
+    padding-bottom: 5rem;
+    background: #E5E5E5;
+    height: 100vh;
+}
+
+.tabTitle {
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    h4 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4F4F4F;
+    }
 }
 
 

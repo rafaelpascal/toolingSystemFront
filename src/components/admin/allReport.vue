@@ -2,40 +2,35 @@
     <div class="container-fluid">
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-6">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title>User Report</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:[`item.actions`]="{ item }">
-                        <!-- <v-icon small class="mr-2">
-                            view Report
-                        </v-icon> -->
-                        <v-btn text style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"  @click="pushtoView(item)">
-                            view Report
-                        </v-btn>
-                        <!-- <v-btn text  style="color: #21618C; font-size: 12px; text-transform:capitalize"  @click="pushtoView(item)">
-                            view
-                        </v-btn> -->
-                        <!-- <v-icon small @click="deleteItem(item)">
-                            mdi-delete
-                        </v-icon> -->
-                    </template>
-                    <template v-slot:[`item.submissionDate`]="{ item }">
-                        <span v-if="item.submissionDate === item.month" small
-                            style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
-                            Submitted
-                        </span>
-                        <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
-                           Late Submission
-                        </span>
-                    </template>
-                </v-data-table>
+                <div class="tabTitle">
+                    <h4 class="ml-2"> User Report</h4>
+                    <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-btn text
+                                style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"
+                                @click="pushtoView(item)">
+                                view Report
+                            </v-btn>
+                        </template>
+                        <template v-slot:[`item.submissionDate`]="{ item }">
+                            <span v-if="item.submissionDate === item.month" small
+                                style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
+                                Submitted
+                            </span>
+                            <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
+                                Late Submission
+                            </span>
+                        </template>
+                    </v-data-table>
+                </div>
             </div>
         </div>
     </div>
@@ -67,12 +62,12 @@ export default {
         // dialog: false,
         dialogDelete: false,
         headers: [
-            { text: 'Created By', value: 'createdBy' },
-            { text: 'Submission Status', value: 'submissionDate' },
-            { text: 'Year', value: 'year' },
-            { text: 'Month', value: 'month' },
-            { text: 'Day', value: 'day' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Created By', value: 'createdBy', class: 'blue-grey lighten-4' },
+            { text: 'Submission Status', value: 'submissionDate', class: 'blue-grey lighten-4' },
+            { text: 'Year', value: 'year', class: 'blue-grey lighten-4' },
+            { text: 'Month', value: 'month', class: 'blue-grey lighten-4' },
+            { text: 'Day', value: 'day', class: 'blue-grey lighten-4' },
+            { text: 'Actions', value: 'actions', sortable: false, class: 'blue-grey lighten-4' },
         ],
         // desserts: [],
         desserts: [],
@@ -238,6 +233,8 @@ $color-accent: desaturate(navy, 80%);
     padding-top: 5rem;
     padding-left: 5rem;
     padding-bottom: 5rem;
+    background: #E5E5E5;
+    height: 100vh;
 }
 
 .sideBtn {
@@ -254,7 +251,26 @@ $color-accent: desaturate(navy, 80%);
     background-color: #fff;
     height: 435px;
 }
+.tabTitle {
+        width: 100%;
+        padding: 20px 0;
+        height: auto;
+        background: #FFFFFF;
+        border-radius: 8px;
 
+        h4 {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 16px;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #4F4F4F;
+        }
+    }
 .mainChat {
     width: 100%;
     position: relative;
@@ -924,10 +940,14 @@ nav {
     }
 
     .container-fluid {
-        position: absolute;
-        top: 10%;
-        padding: 1rem;
+        // position: absolute;
+        // top: 10%;
+        padding-top: 5rem;
+        padding-left: 1rem;
+        height: auto;
+        background-color: #E5E5E5;
     }
+
 
     .reviews {
         background-color: #fff;

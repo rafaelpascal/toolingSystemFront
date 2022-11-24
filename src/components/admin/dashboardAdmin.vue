@@ -1,18 +1,36 @@
 <template>
-    <div class="container-fluid">
+    <div style="" class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="cnt" style="">
-                    <div style="background-color:#9C27B0" class="textD">
-                        <div>
-                            <span style="font-size: 6rem; color: #fff"><i class="fas fa-paste"></i></span>
+                    <div style="background-color:#FFF9F4; border-radius: 20px;" class="textD">
+                        <div style="background: #FFEBDC;" class="iconDiv">
+                            <img src="../../assets/allreport.png" alt="" srcset="">
                         </div>
-                        <div>
-                            <h6 style="color: #fff" class="numbertxt">{{ reports }}</h6>
-                            <p style="color: #fff" class="numbertxt2">Reports</p>
+                        <div class="tlhn">
+                            <p class="numbertxt2">All Reports</p>
+                            <h6 class="numbertxt">{{ reports }}</h6>
                         </div>
                     </div>
-                    <div  style="background-color:#673AB7" class="textD">
+                    <div style="background-color:#ECFFF4; border-radius: 20px;" class="textD">
+                        <div style="background-color:#C4FFDD" class="iconDiv">
+                            <img src="../../assets/logs.svg" alt="" srcset="">
+                        </div>
+                        <div class="tlhn">
+                            <p class="numbertxt2">Logs</p>
+                            <h6 class="numbertxt">{{ logs }}</h6>
+                        </div>
+                    </div>
+                    <div style="background-color:#F9FBFF; border-radius: 20px;" class="textD">
+                        <div style="background-color:#D2E2FF" class="iconDiv">
+                            <img src="../../assets/users.svg" alt="" srcset="">
+                        </div>
+                        <div class="tlhn">
+                            <p class="numbertxt2">Users</p>
+                            <h6 class="numbertxt">{{ users }}</h6>
+                        </div>
+                    </div>
+                    <!-- <div style="background-color:#673AB7" class="textD">
                         <div>
                             <span style="font-size: 6rem; color: #fff"><i class="fas fa-users"></i></span>
                         </div>
@@ -20,8 +38,8 @@
                             <h6 style="color: #fff" class="numbertxt">{{ users }}</h6>
                             <p style="color: #fff" class="numbertxt2">Users</p>
                         </div>
-                    </div>
-                    <div style="background-color:#009688" class="textD">
+                    </div> -->
+                    <!-- <div style="background-color:#009688" class="textD">
                         <div>
                             <span style="font-size: 6rem; color: #fff"><i class="fas fa-file-alt"></i></span>
                         </div>
@@ -29,43 +47,49 @@
                             <h6 style="color: #fff" class="numbertxt">{{ logs }}</h6>
                             <p style="color: #fff" class="numbertxt2">Logs</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-2">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title>User Report</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:[`item.actions`]="{ item }">
-                        <v-btn text style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"  @click="pushtoView(item)">
-                            view Report
-                        </v-btn>
-                        <!-- <v-btn text  style="color: #21618C; font-size: 12px; text-transform:capitalize"  @click="pushtoView(item)">
+                <div class="tabTitle">
+                    <h4 class="ml-2"> Users Table</h4>
+                    <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <!-- <v-toolbar-title>User Report</v-toolbar-title> -->
+                                <v-spacer></v-spacer>
+                                <input type="text">
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-btn text
+                                style="text-transform:capitalize; color:#21618C; font-size: 10px; margin: 0%; padding: 0%;"
+                                @click="pushtoView(item)">
+                                view Report
+                            </v-btn>
+                            <!-- <v-btn text  style="color: #21618C; font-size: 12px; text-transform:capitalize"  @click="pushtoView(item)">
                             view
                         </v-btn> -->
-                        <!-- <v-icon small @click="deleteItem(item)">
+                            <!-- <v-icon small @click="deleteItem(item)">
                             mdi-delete
                         </v-icon> -->
-                    </template>
-                    <template v-slot:[`item.submissionDate`]="{ item }">
-                        <span v-if="item.submissionDate === item.month" small
-                            style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
-                            Submitted
-                        </span>
-                        <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
-                            Late Submission
-                        </span>
-                    </template>
-                </v-data-table>
+                        </template>
+                        <template v-slot:[`item.submissionDate`]="{ item }">
+                            <span v-if="item.submissionDate === item.month" small
+                                style="color: #21618C; font-size: 12px; text-transform:capitalize" class="mr-2">
+                                Submitted
+                            </span>
+                            <span v-else small style="color:red; font-size: 12px; text-transform:capitalize">
+                                Late Submission
+                            </span>
+                        </template>
+                    </v-data-table>
+                </div>
             </div>
             <!-- <div class="mt-10 col-lg-4">
                 <div id="chart">
@@ -75,17 +99,19 @@
         </div>
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="Logsheader" :items="Logdesserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-2">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title>User Log</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                        </v-toolbar>
-                    </template>
-                </v-data-table>
+                <div class="tabTitle">
+                    <h4 class="ml-2"> Users Logs</h4>
+                    <v-data-table :headers="Logsheader" :items="Logdesserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                            </v-toolbar>
+                        </template>
+                    </v-data-table>
+                </div>
             </div>
         </div>
     </div>
@@ -176,20 +202,20 @@ export default {
         dialog: false,
         dialogDelete: false,
         headers: [
-            { text: 'Created By', value: 'createdBy' },
-            { text: 'Submission Status', value: 'submissionDate' },
-            { text: 'Year', value: 'year' },
-            { text: 'Month', value: 'month' },
-            { text: 'Day', value: 'day' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Created By', value: 'createdBy', class: 'blue-grey lighten-4', },
+            { text: 'Submission Status', value: 'submissionDate', class: 'blue-grey lighten-4' },
+            { text: 'Year', value: 'year', class: 'blue-grey lighten-4' },
+            { text: 'Month', value: 'month', class: 'blue-grey lighten-4' },
+            { text: 'Day', value: 'day', class: 'blue-grey lighten-4' },
+            { text: 'Actions', value: 'actions', sortable: false, class: 'blue-grey lighten-4' },
         ],
         Logsheader: [
-            { text: 'User Name', value: 'username' },
-            { text: 'Email', value: 'useremail' },
-            { text: 'Phone', value: 'phone' },
-            { text: 'Category', value: 'usercategory' },
-            { text: 'Activity', value: 'activity' },
-            { text: 'Date', value: 'date' },
+            { text: 'User Name', value: 'username', class: 'blue-grey lighten-4', },
+            { text: 'Email', value: 'useremail', class: 'blue-grey lighten-4', },
+            { text: 'Phone', value: 'phone', class: 'blue-grey lighten-4', },
+            // { text: 'Category', value: 'usercategory' },
+            { text: 'Activity', value: 'activity', class: 'blue-grey lighten-4', },
+            { text: 'Date', value: 'date', class: 'blue-grey lighten-4', },
             // { text: 'Actions', value: 'actions', sortable: false },
         ],
         // desserts: [],
@@ -437,6 +463,8 @@ $color-accent: desaturate(navy, 80%);
     padding-top: 5rem;
     padding-left: 5rem;
     padding-bottom: 5rem;
+    background-color: #E5E5E5;
+    height: 100%;
 }
 
 .sideBtn {
@@ -734,27 +762,44 @@ $color-accent: desaturate(navy, 80%);
         // border-radius: 10px;
         // box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 2px;
         margin-right: 10px;
+        padding: 0 32px;
         width: 100%;
+        height: 150px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
+
+        .tlhn {
+            margin-left: 18px;
+        }
+
+        .iconDiv {
+            padding: 16px;
+            gap: 10px;
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+        }
 
         .numbertxt {
             font-family: 'Poppins';
             font-style: normal;
-            font-weight: bolder;
-            font-size: 45px;
-            text-align: left;
-            color: #2e4765;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 42px;
+            /* identical to box height */
+            color: #15192C;
         }
 
         .numbertxt2 {
             font-family: 'Poppins';
             font-style: normal;
             font-weight: 500;
-            font-size: 15px;
-            text-align: left;
-            color: #2e4765;
+            font-size: 24px;
+            margin: 0%;
+            // line-height: 32px;
+            /* identical to box height */
+            color: #92959E;
         }
     }
 }
@@ -773,6 +818,27 @@ $color-accent: desaturate(navy, 80%);
     text-align: center;
 
     color: #FFFFFF;
+}
+
+.tabTitle {
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    h4 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4F4F4F;
+    }
 }
 
 .regDiv {
@@ -1123,10 +1189,22 @@ nav {
     }
 
     .container-fluid {
-        position: absolute;
-        top: 10%;
-        padding: 1rem;
+        // position: absolute;
+        // top: 10%;
+        padding-top: 5rem;
+        padding-left: 1rem;
+        height: auto;
+        background-color: #E5E5E5;
     }
+
+    // .container-fluid {
+    //     height: 100vh;
+    //     padding-top: 5rem;
+    //     padding-left: 5rem;
+    //     padding-bottom: 5rem;
+    //     background-color: #E5E5E5;
+    //     height: 100%;
+    // }
 
     .reviews {
         background-color: #fff;

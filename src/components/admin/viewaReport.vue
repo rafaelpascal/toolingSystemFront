@@ -100,27 +100,27 @@
                                     </div>
                                 </div>
                                 <div v-for="replymessage in replymessages2" :key="replymessage.id">
-                                    <!-- <span v-if="replymessage.remarkId == replymessage.remarkId"> -->
                                     <div v-if="replymessage.showreplyBox">
-                                        <p class="userreply"><span style="margin-right:8px; font-size:20px"><i
-                                                    class="fas fa-reply-all"></i></span>{{ replymessage.user }}</p>
-                                        <span class="textreply">{{ replymessage.text }}</span>
-                                        <div id="message.remarkId" class="textBtn2">
-                                            <textarea v-model="replytxt" class="textArea" id=""
-                                                placeholder="Comment/Remarks" rows="1"></textarea>
-                                            <button class="saveRemark"
-                                                @click="postRemarkreply2(replymessage)">Send</button>
+                                        <span v-if="message.remarkId == replymessage.remarkId">
+                                            <p class="userreply"><span style="margin-right:8px; font-size:20px"><i
+                                                        class="fas fa-reply-all"></i></span>{{ replymessage.user }}</p>
+                                            <span class="textreply">{{ replymessage.text }}</span>
+                                            <div id="message.remarkId" class="textBtn2">
+                                                <textarea v-on:keyup.enter="postRemarkreply2(replymessage)" v-model="replytxt" class="textArea" id=""
+                                                    placeholder="Comment/Remarks" rows="1"></textarea>
+                                                <button class="saveRemark"
+                                                    @click="postRemarkreply2(replymessage)">Send</button>
+                                            </div>
+                                        </span>
+                                        <span v-else></span>
                                         </div>
                                     </div>
-                                    <!-- </span>
-                                <span v-else></span> -->
-                                </div>
                                 <div v-if="message.showreplyBox">
                                     <p class="userreply"><span style="margin-right:8px; font-size:20px"><i
                                                 class="fas fa-reply-all"></i></span>{{ message.user }}</p>
                                     <span class="textreply">{{ message.text }}</span>
                                     <div id="message.remarkId" class="textBtn2">
-                                        <textarea v-model="replytxt" class="textArea" id=""
+                                        <textarea v-on:keyup.enter="postRemarkreply(message)" v-model="replytxt" class="textArea" id=""
                                             placeholder="Comment/Remarks" rows="1"></textarea>
                                         <button class="saveRemark" @click="postRemarkreply(message)">Send</button>
                                     </div>
@@ -162,7 +162,7 @@
                             color="deep-purple" label="Remark" rows="1">
                         </v-textarea> -->
                         <div class="textBtn">
-                            <textarea v-on:keyup.enter="sendMessage" v-model="bio" class="textArea"
+                            <textarea v-on:keyup.enter="saveRemark" v-model="bio" class="textArea"
                                 id="exampleFormControlTextarea1" placeholder="Comment/Remarks" rows="1"></textarea>
                             <button class="saveRemark" @click="saveRemark">Send</button>
                         </div>
@@ -980,11 +980,9 @@ $color-accent: desaturate(navy, 80%);
 }
 
 .container-fluid {
-    // position: absolute;
-    // top: 10%;
-    padding-left: 5rem;
-    // padding-right: 5rem;
+    height: 100vh;
     padding-top: 2rem;
+    padding-left: 5rem;
     padding-bottom: 5rem;
 }
 

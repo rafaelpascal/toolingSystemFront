@@ -80,8 +80,8 @@
                                                     <button class="mr-4 deleteBtn"
                                                         @click="replyTxtShw2(replymessage)"><i
                                                             class="fas fa-reply"></i></button>
-                                                    <button class="deleteBtn" @click="deleteReply(replymessage)"><i
-                                                            class="fas fa-trash-alt"></i></button>
+                                                    <!-- <button class="deleteBtn" @click="deleteReply(replymessage)"><i
+                                                            class="fas fa-trash-alt"></i></button> -->
                                                 </div>
                                             </h6>
                                             <!-- <span v-if="message.text" class="textreply2"><span>Reply to </span>{{
@@ -1118,13 +1118,12 @@ $color-accent: desaturate(navy, 80%);
 }
 
 .container-fluid {
-    // position: absolute;
-    // top: 10%;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    height: 100vh;
     padding-top: 2rem;
+    padding-left: 5rem;
     padding-bottom: 5rem;
 }
+
 
 
 .newR2 {

@@ -2,20 +2,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="mt-10 col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
-                    :items-per-page="5" class="elevation-6">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title>User Log</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
-                                hide-details></v-text-field>
-                        </v-toolbar>
-                    </template>
-                </v-data-table>
+                <div class="tabTitle">
+                    <h4 class="ml-2"> Activities</h4>
+                    <v-data-table :headers="headers" :items="desserts" :search="search" sort-by="calories"
+                        :items-per-page="5" class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-spacer></v-spacer>
+                                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                                    hide-details></v-text-field>
+                            </v-toolbar>
+                        </template>
+                    </v-data-table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -44,12 +46,12 @@ export default {
         // dialog: false,
         dialogDelete: false,
         headers: [
-            { text: 'User Name', value: 'username' },
-            { text: 'Email', value: 'useremail' },
-            { text: 'Phone', value: 'phone' },
-            { text: 'Category', value: 'usercategory' },
-            { text: 'Activity', value: 'activity' },
-            { text: 'Date', value: 'date' },
+            { text: 'User Name', value: 'username', class: 'blue-grey lighten-4'},
+            { text: 'Email', value: 'useremail', class: 'blue-grey lighten-4'},
+            { text: 'Phone', value: 'phone', class: 'blue-grey lighten-4'},
+            // { text: 'Category', value: 'usercategory' },
+            { text: 'Activity', value: 'activity', class: 'blue-grey lighten-4'},
+            { text: 'Date', value: 'date', class: 'blue-grey lighten-4'},
             // { text: 'Actions', value: 'actions', sortable: false },
         ],
         // desserts: [],
@@ -89,7 +91,7 @@ export default {
         window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
-      async getallLogs() {
+        async getallLogs() {
             console.log();
             const retrievedData = localStorage.getItem('token');
             const token = JSON.parse(retrievedData);
@@ -102,17 +104,17 @@ export default {
                 .then((response) => {
                     console.log(response.data.data.logs);
                     response.data.data.logs.forEach(elem => {
-                    this.desserts.push({
-                        logId: elem._id,
-                        createdById: elem.user._id,
-                        username: elem.user.firstName + " " + elem.user.lastName,
-                        activity: elem.activity,
-                        useremail: elem.user.email,
-                        phone: elem.user.phone,
-                        usercategory: elem.user.category,
-                        date: elem.date.split("T")[0],
-                    })
-                });
+                        this.desserts.push({
+                            logId: elem._id,
+                            createdById: elem.user._id,
+                            username: elem.user.firstName + " " + elem.user.lastName,
+                            activity: elem.activity,
+                            useremail: elem.user.email,
+                            phone: elem.user.phone,
+                            usercategory: elem.user.category.Category,
+                            date: elem.date.split("T")[0],
+                        })
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -177,6 +179,8 @@ $color-accent: desaturate(navy, 80%);
     padding-top: 5rem;
     padding-left: 5rem;
     padding-bottom: 5rem;
+    background: #E5E5E5;
+    height: 100vh;
 }
 
 .sideBtn {
@@ -187,6 +191,27 @@ $color-accent: desaturate(navy, 80%);
     font-weight: normal;
     font-size: 18px;
     // border-radius: 3px;
+}
+
+.tabTitle {
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    h4 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4F4F4F;
+    }
 }
 
 .chartD {
@@ -863,10 +888,14 @@ nav {
     }
 
     .container-fluid {
-        position: absolute;
-        top: 10%;
-        padding: 1rem;
+        // position: absolute;
+        // top: 10%;
+        padding-top: 5rem;
+        padding-left: 1rem;
+        height: auto;
+        background-color: #E5E5E5;
     }
+
 
     .reviews {
         background-color: #fff;

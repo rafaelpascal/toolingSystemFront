@@ -1,71 +1,75 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
-                <v-data-table :headers="headers" :items="desserts" sort-by="calories" :items-per-page="5"
-                    class="elevation-1">
-                    <template v-slot:top>
-                        <v-toolbar flat>
-                            <v-toolbar-title>Settings</v-toolbar-title>
-                            <v-divider class="mx-4" inset vertical></v-divider>
-                            <v-spacer></v-spacer>
-                            <v-dialog v-model="dialog" max-width="500px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <button class="ml-8 newR" v-bind="attrs" v-on="on">
-                                        Add Settings
-                                    </button>
-                                </template>
-                                <v-card>
-                                    <v-card-title style="background-color: #21618C; color: #fff; margin-bottom: 1rem">
-                                        <span style="font-size: 20px">{{ formTitle }}</span>
-                                    </v-card-title>
-                                    <div class="pa-4">
-                                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
-                                            transition="scale-transition" offset-y min-width="auto">
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-text-field v-model="editedItem.date" label="Select Dealine Date"
-                                                    prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on">
-                                                </v-text-field>
-                                            </template>
-                                            <v-date-picker v-model="editedItem.date" :active-picker.sync="activePicker"
-                                                :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                                                min="1950-01-01" @change="savedate"></v-date-picker>
-                                        </v-menu>
-                                        <v-text-field v-model="editedItem.frequency" label="Number of reminder"
-                                            clearable>
-                                        </v-text-field>
-                                        <!-- <v-text-field v-model="frequency" label="Frequency" clearable></v-text-field> -->
-                                        <v-textarea solo name="input-7-4" v-model="editedItem.message" label="Message">
-                                        </v-textarea>
-                                        <button class="saveRemark" @click="save()">Save Settings</button>
-                                    </div>
+            <div class="mt-10 col-lg-12">
+                <div class="tabTitle">
+                    <h4 class="ml-2">Settings</h4>
+                    <v-data-table :headers="headers" :items="desserts" sort-by="calories" :items-per-page="5"
+                        class="">
+                        <template v-slot:top>
+                            <v-toolbar flat>
+                                <v-spacer></v-spacer>
+                                <v-dialog v-model="dialog" max-width="500px">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <button class="ml-8 newR" v-bind="attrs" v-on="on">
+                                            Add Settings
+                                        </button>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title
+                                            style="background-color: #21618C; color: #fff; margin-bottom: 1rem">
+                                            <span style="font-size: 20px">{{ formTitle }}</span>
+                                        </v-card-title>
+                                        <div class="pa-4">
+                                            <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
+                                                transition="scale-transition" offset-y min-width="auto">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-text-field v-model="editedItem.date" label="Select Dealine Date"
+                                                        prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on">
+                                                    </v-text-field>
+                                                </template>
+                                                <v-date-picker v-model="editedItem.date"
+                                                    :active-picker.sync="activePicker"
+                                                    :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                                                    min="1950-01-01" @change="savedate"></v-date-picker>
+                                            </v-menu>
+                                            <v-text-field v-model="editedItem.frequency" label="Number of reminder"
+                                                clearable>
+                                            </v-text-field>
+                                            <!-- <v-text-field v-model="frequency" label="Frequency" clearable></v-text-field> -->
+                                            <v-textarea solo name="input-7-4" v-model="editedItem.message"
+                                                label="Message">
+                                            </v-textarea>
+                                            <button class="saveRemark" @click="save()">Save Settings</button>
+                                        </div>
 
-                                    <!-- <button id="saveSettings" class="saveRemark" @click="saveSetting">Save</button> -->
-                                </v-card>
-                            </v-dialog>
-                            <v-dialog v-model="dialogDelete" max-width="500px">
-                                <v-card>
-                                    <v-card-title class="textDel">Are you sure you want to delete this Settings?
-                                    </v-card-title>
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                        <v-spacer></v-spacer>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-dialog>
-                        </v-toolbar>
-                    </template>
-                    <template v-slot:[`item.actions`]="{ item }">
-                        <v-icon small class="mr-2" @click="editItem(item)">
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon small @click="deleteItem(item)">
-                            mdi-delete
-                        </v-icon>
-                    </template>
-                </v-data-table>
+                                        <!-- <button id="saveSettings" class="saveRemark" @click="saveSetting">Save</button> -->
+                                    </v-card>
+                                </v-dialog>
+                                <v-dialog v-model="dialogDelete" max-width="500px">
+                                    <v-card>
+                                        <v-card-title class="textDel">Are you sure you want to delete this Settings?
+                                        </v-card-title>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                                            <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                                            <v-spacer></v-spacer>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-toolbar>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-icon small class="mr-2" @click="editItem(item)">
+                                mdi-pencil
+                            </v-icon>
+                            <v-icon small @click="deleteItem(item)">
+                                mdi-delete
+                            </v-icon>
+                        </template>
+                    </v-data-table>
+                </div>
             </div>
         </div>
     </div>
@@ -85,14 +89,14 @@ export default {
         dialog: false,
         dialogDelete: false,
         headers: [
-            { text: 'First Name', align: 'start', sortable: false, value: 'firstName' },
-            { text: 'Last Name', value: 'lastName' },
-            { text: 'Email', value: 'email' },
-            { text: 'Level', value: 'level' },
-            { text: 'Deadline', value: 'date' },
-            { text: 'Frequncy', value: 'frequency' },
+            { text: 'First Name', align: 'start', sortable: false, value: 'firstName', class: 'blue-grey lighten-4' },
+            { text: 'Last Name', value: 'lastName', class: 'blue-grey lighten-4' },
+            { text: 'Email', value: 'email', class: 'blue-grey lighten-4' },
+            { text: 'Level', value: 'level', class: 'blue-grey lighten-4' },
+            { text: 'Deadline', value: 'date', class: 'blue-grey lighten-4' },
+            { text: 'Frequncy', value: 'frequency', class: 'blue-grey lighten-4' },
             // { text: 'Message', value: 'message' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Actions', value: 'actions', sortable: false, class: 'blue-grey lighten-4' },
         ],
         desserts: [],
         editedIndex: -1,
@@ -350,6 +354,30 @@ export default {
     padding-top: 5rem;
     padding-left: 5rem;
     padding-bottom: 5rem;
+    background: #E5E5E5;
+    height: 100vh;
+}
+
+
+.tabTitle {
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 8px;
+
+    h4 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #4F4F4F;
+    }
 }
 
 .newR {

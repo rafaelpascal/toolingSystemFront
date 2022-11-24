@@ -15,13 +15,21 @@
                         <div class="formDiv">
                             <h3>Sign In</h3>
                             <div class="inputs">
-                                <div class="mb-3">
+                                <div class="">
                                     <label class="label-f">Email address</label>
-                                    <input v-model="email" type="email" class="textField" id="">
+                                    <v-text-field solo v-model="email" :rules="[emailrules.required, emailrules.email]" label="Email Address">
+                                    </v-text-field>
+                                    <!-- <input v-model="email" type="email" class="textField" id=""> -->
                                 </div>
-                                <div class="mb-3">
+                                <div class="">
                                     <label class="label-f">Password</label>
-                                    <input v-model="password" type="password" class="textField" id="">
+                                    <v-text-field solo :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                                        :rules="[rules.required, rules.min]" :type="show3 ? 'text' : 'password'"
+                                        name="input-10-2" label="Password" hint="At least 8 characters"
+                                        v-model="password" value="password" class="input-group--focused"
+                                        @click:append="show3 = !show3">
+                                    </v-text-field>
+                                    <!-- <input v-model="password" type="password" class="textField" id=""> -->
                                 </div>
                                 <!-- <div class="mb-3">
                                     <p class="alrdy">Don't Have an Account? <button @click="signUp" class="signIn">Sign
@@ -54,6 +62,20 @@ export default {
             password: '',
             userid: '',
             userName: '',
+            show3: false,
+            rules: {
+                required: value => !!value || 'Required.',
+                min: v => v.length >= 8 || 'Min 8 characters',
+                emailMatch: () => (`The email and password you entered don't match`),
+            },
+            emailrules: {
+                required: value => !!value || 'Required.',
+                counter: value => value.length <= 20 || 'Max 20 characters',
+                email: value => {
+                    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    return pattern.test(value) || 'Invalid e-mail.'
+                },
+            },
         }
     },
     methods: {
@@ -78,8 +100,8 @@ export default {
                 }
                 await axios.post('http://localhost:3000/api/v1/review/auth/login', logindata)
                     .then(response => {
-                        console.log(response.data.data.loginCount);
-                        const loginCount = response.data.data.loginCount
+                        console.log(response.data.message);
+                        const loginCount = response.data.data.loginCount //Checks if the user have logged in Before
                         Swal.fire({
                             icon: 'success',
                             title: 'Proceed',
@@ -111,7 +133,7 @@ export default {
                             }, 1200);
                         } else if (decoded.category === 'Admin') {
                             setTimeout(() => {
-                                this.$router.push('/userPage')
+                                this.$router.push('/dashboardadmin')
                             }, 1200);
                         } else {
                             setTimeout(() => {
@@ -124,7 +146,7 @@ export default {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Wrong Credentials',
+                            text: error.response.data.message,
                             width: 350,
                         })
                     });

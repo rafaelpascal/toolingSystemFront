@@ -7,32 +7,35 @@
                         <i class="fas fa-bars" id="header-toggle"></i>
                     </div>
                     <!-- <h6 class="namet" style="">Rafael Pascal</h6> -->
+                    <!-- <span class="welcomeMsg">Welcome<span style="margin-left: 6px">{{ avatar
+                    }}</span></span> -->
                 </div>
-                <div style="display: flex; justify-content:center; align-items: center;">
-                    <span id="email" class="mx-2">{{ email }}</span>
-                    <v-menu open-on-hover offset-y>
+                <div style="display: flex; justify-content:space-between; align-items: center;">
+                    <v-menu offset-y>
                         <template v-slot:activator="{ on, attrs }">
-                            <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on">
-                                Dropdown
-                            </v-btn> -->
-                            <v-avatar v-bind="attrs" v-on="on">
-                                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-                            </v-avatar>
+                            <span v-bind="attrs" v-on="on" class="emaildiv" id="email">{{ email }} <button text><i
+                                        class="fas fa-chevron-down"></i></button></span>
                         </template>
-
                         <v-list>
                             <v-list-item>
                                 <router-link text style="text-transform:capitalize; font-size:15px; color: #4A869F"
                                     to="/adminProfile">Profile</router-link>
                             </v-list-item>
-                            <!-- <v-list-item>
-                                <router-link text style="text-transform:capitalize; font-size:15px; color: #4A869F"
-                                    to="/changePassword"> Reset
-                                    Password
-                                </router-link>
-                            </v-list-item> -->
                         </v-list>
                     </v-menu>
+                    <!-- <v-menu bottom origin="center center" transition="scale-transition">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                                Scale Transition
+                            </v-btn>
+                        </template>
+
+                        <v-list>
+                            <v-list-item v-for="(item, i) in items" :key="i">
+                                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu> -->
                 </div>
             </header>
             <div class="l-navbar" id="nav-bar">
@@ -102,6 +105,7 @@ export default {
     data() {
         return {
             bell: '',
+            avatar: '',
             email: '',
             subMenu: false,
         }
@@ -121,7 +125,10 @@ export default {
             }),
         ])
             .then(axios.spread((response1) => {
+                console.log('from Dash', response1.data.user.lastName[0],);
                 this.email = response1.data.user.email
+                this.avatar = response1.data.user.lastName
+
                 // console.log(response1.data.user.email);
                 //response2 is the result of second call
             }))
@@ -222,6 +229,31 @@ a {
         font-weight: normal;
         font-size: 16px;
     }
+}
+
+.welcomeMsg {
+    font-family: 'Red Hat Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    margin-left: 20px;
+    color: #252A2F;
+}
+
+.emaildiv {
+    padding: 10px 12px;
+    width: 100%;
+    // height: 32px;
+    background: #F2F2F2;
+    border-radius: 16px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+    color: #444444;
 }
 
 .header {
